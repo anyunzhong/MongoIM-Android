@@ -373,3 +373,108 @@ im.configPluginProviders(Conversation.Type.PRIVATE, new PluginProvider[]{new Pho
             }
         });
 ```
+
+
+<br />
+自定义扩展
+============
+
+####自定义新的消息及显示
+
+##### 1.新的消息类型
+如果是媒体类消息(比如图片 文字 视频等) 直接继承 MediaMessage 如果是通知类消息(比如系统提示) 直接继承 InfoNotifyMessage
+当然你也可以直接继承MessageContent
+
+```java
+@MessageContent.Tag(type = MessageContent.Type.YOUR_TYPE, action = MessageContent.Tag.PERSIST | MessageContent.Tag.COUNT)
+public class YourMessage extends MediaMessage {
+
+    private String yourField;
+
+    @Override
+    public byte[] encode() {
+        return new byte[0];
+    }
+
+    @Override
+    public String toJson() {
+        return null;
+    }
+
+    @Override
+    public void decode(byte[] bytes) {
+
+    }
+}
+```
+
+#####2. 消息显示
+如果需要显示头像 直接继承MessageTemplate 如果不需要 直接继承BaseMessageTemplate
+
+例如：定义一个需要显示头像类型的模版
+```java
+@MessageTemplate.Tag(model = YourMessage.class)
+public class YourMessageTemplate extends MessageTemplate {
+
+    private TextView yourView;
+
+    public YourMessageTemplate() {
+        //messageContentView指消息中间部分容器
+        messageContentView.addView(yourView, params);
+    }
+
+
+    @Override
+    protected void refresh(Message message) {
+        super.refresh(message);
+        //更新数据
+    }
+
+
+    //长按消息后 需要增加自定义的弹出菜单
+    @Override
+    protected List<PopItem> getPopItems() {
+        List<PopItem> items = new ArrayList<>();
+        items.add(new PopItem("复制", new PopItem.Listener() {
+            @Override
+            public void onClick() {
+                ClipboardManager cmb = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                cmb.setPrimaryClip(ClipData.newPlainText("text", ((TextMessage) message.getContent()).getText()));
+            }
+        }));
+        return items;
+    }
+
+
+}
+```
+
+
+不需要显示头像
+```java
+@MessageTemplate.Tag(model = YourMessage.class)
+public class YourMessageTemplate extends BaseMessageTemplate {
+
+    private TextView yourView;
+
+    public YourMessageTemplate() {
+        //contentView指整个显示内容的区域
+        contentView.addView(yourView, params);
+    }
+
+
+    @Override
+    protected void refresh(Message message) {
+        super.refresh(message);
+        //将数据绑定到view上
+    }
+}
+
+```
+
+#####3. 注册消息实体及显示模版
+
+```java
+MongoIM.sharedInstance().registerMessageContent(YourMessage.class);
+MongoIM.sharedInstance().registerMessageTemplate(YourMessageTemplate.class);
+```
