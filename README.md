@@ -55,7 +55,7 @@ MongoIM-Android
 安装
 ============
 ```gradle
-compile 'net.datafans:mongo-im:1.0.1'
+compile 'net.datafans:mongo-im:1.0.2'
 ```
 
 <br />
