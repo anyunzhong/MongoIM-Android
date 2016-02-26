@@ -246,3 +246,130 @@ new MessageFragment() 然后嵌入到你需要的地方
 ```java
 MongoIM.sharedInstance().startPrivateConversation(context, "目标用户ID");
 ```
+
+
+<br />
+界面及相关逻辑
+===============
+
+####设置用户头像 昵称等
+
+```java
+        im.setUserInfoProvider(new UserInfoProvider() {
+
+            @Override
+            public void getUserInfo(String userId, Callback callback) {
+                UserInfo userInfo;
+                switch (userId) {
+                    case "100010":
+                        userInfo = new UserInfo(userId, "Allen", "http://file-cdn.datafans.net/avatar/1.jpeg");
+                        break;
+                    case "100020":
+                        userInfo = new UserInfo(userId, "Yanhua", "http://file-cdn.datafans.net/avatar/2.jpg");
+                        break;
+                    default:
+                        userInfo = new UserInfo(userId, userId, "");
+                }
+
+                //userInfo可以直接从本地获取 也可以从网络获取后 然后callback
+                callback.callback(userInfo);
+            }
+        });
+```
+
+####添加表情包
+
+```java
+        //模拟一组小黄鸡动态表情 一共32个
+        List<PackageEmotionItem> items = new ArrayList<>();
+        for (int i = 1; i <= 32; i++) {
+            PackageEmotionItem item = new PackageEmotionItem();
+            item.setName("小黄鸡" + i);
+            item.setRemoteGif("http://file-cdn.datafans.net/emotion/yellow_chicken/gif/" + i + ".gif");
+            item.setRemoteThumb("http://file-cdn.datafans.net/emotion/yellow_chicken/png/" + i + ".png");
+            items.add(item);
+        }
+
+        String tabIconPath = "http://file-cdn.datafans.net/emotion/yellow_chicken/icon3x.png";
+        PackageEmotion emotion = new PackageEmotion(tabIconPath, items);
+        MongoIM.sharedInstance().addPackageEmotion(emotion);
+
+        //模拟一组小鸟动态表情 一共16个
+        List<PackageEmotionItem> items2 = new ArrayList<>();
+        for (int i = 1; i <= 16; i++) {
+            PackageEmotionItem item = new PackageEmotionItem();
+            item.setName("小小鸟" + i);
+            item.setRemoteGif("http://file-cdn.datafans.net/emotion/bird/gif/" + i + ".gif");
+            item.setRemoteThumb("http://file-cdn.datafans.net/emotion/bird/png/" + i + ".png");
+            items2.add(item);
+        }
+
+        String tabIconPath2 = "http://file-cdn.datafans.net/emotion/bird/icon3x.png";
+        PackageEmotion emotion2 = new PackageEmotion(tabIconPath2, items2);
+        MongoIM.sharedInstance().addPackageEmotion(emotion2);
+```
+
+
+####点击插件后弹出的界面
+```java
+        //默认已经实现的有 照片选择 拍照 选地点 如果需要自定义弹出界面 直接通过注册的方式覆盖原有实现即可
+        //其它的都需要你去实现 通过传入的plugin来发送消息 发送后退出当前controller
+        //如果是自定义plugin 则直接覆盖基类onClick方法即可实现相同效果
+        MongoIM.sharedInstance().registerPluginPresentController(RedBagPluginProvider.class, RedBagCreateController.class);
+        MongoIM.sharedInstance().registerPluginPresentController(NameCardPluginProvider.class, NameCardChooseController.class);
+        MongoIM.sharedInstance().registerPluginPresentController(FavouritePluginProvider.class, FavouriteChooseController.class);
+
+```
+
+####配置需要使用的插件
+```java
+im.configPluginProviders(Conversation.Type.PRIVATE, new PluginProvider[]{new PhotoAlbumPluginProvider()});
+```
+
+####点击消息气泡执行的动作
+```java
+        MongoIM.sharedInstance().registerClickHandler(MessageContent.Type.RED_BAG, new MessageTemplateManager.ClickHandler() {
+            @Override
+            public void onClickMessage(Message message, Activity activity) {
+
+                Toast toast = Toast.makeText(activity, "点击了消息", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+```
+
+####位置发送和显示 需要使用高德地图
+将demo中的jar包放入到你的工程libs中
+
+配置高德地图
+```xml
+        <!--高德地图开始-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="高德地图key" />
+
+        <service android:name="com.amap.api.location.APSService" />
+        <!--高德地图结束-->
+```
+注册插件
+```java
+        im.registerPlugin(LocationPluginProvider.class, Conversation.Type.PRIVATE);
+```
+
+点击地图消息后跳转
+```java
+        MongoIM.sharedInstance().registerClickHandler(MessageContent.Type.LOCATION, new MessageTemplateManager.ClickHandler() {
+            @Override
+            public void onClickMessage(Message message, Activity activity) {
+
+                MessageContent content = message.getContent();
+                if (content instanceof LocationMessage) {
+                    LocationMessage locationMessage = (LocationMessage) content;
+                    Intent intent = new Intent(activity, LocationController.class);
+                    intent.putExtra("lat", locationMessage.getLat());
+                    intent.putExtra("lng", locationMessage.getLng());
+                    activity.startActivity(intent);
+                }
+            }
+        });
+```
