@@ -19,7 +19,7 @@ MongoIM-Android
 
 架构
 ============
-![http://file-cdn.datafans.net/github/mongoimios/arch.png_600.jpeg](http://file-cdn.datafans.net/github/mongoimios/arch.png_600.jpeg)
+![http://file-cdn.datafans.net/github/mongoimios/arch1.png](http://file-cdn.datafans.net/github/mongoimios/arch1.png)
 
 <br />
 #### UI层风格可切换
