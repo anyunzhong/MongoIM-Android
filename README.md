@@ -54,3 +54,10 @@ MongoIM-Android
 <br />
 安装
 ============
+```gradle
+compile 'net.datafans:mongo-im:1.0.1'
+```
+
+<br />
+快速开始
+===============
