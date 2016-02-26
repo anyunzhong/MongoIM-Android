@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
+import net.datafans.android.common.AndroidCommon;
 import net.datafans.android.common.helper.LogHelper;
+import net.datafans.android.common.widget.imageview.ImageViewType;
 import net.datafans.android.common.widget.table.TableViewCell;
 
 import java.lang.annotation.Annotation;
@@ -66,6 +68,10 @@ public class MongoIM {
 
     public void init(Context context) {
         this.context = context;
+
+        AndroidCommon.onCreate(context);
+        AndroidCommon.setImageViewType(ImageViewType.Smart);
+        AndroidCommon.configLog("## mongo-im ##", true);
 
         initMessageComponent();
         addDefaultEmotion();

@@ -21,6 +21,7 @@ import im.mongo.demo.plugin.location.LocationController;
 import im.mongo.demo.plugin.location.LocationPluginProvider;
 import im.mongo.demo.plugin.video.VideoPluginProvider;
 import im.mongo.handler.MessageHandler;
+import im.mongo.handler.MongoMessageHandler;
 import im.mongo.ui.emotion.PackageEmotion;
 import im.mongo.ui.emotion.PackageEmotionItem;
 import im.mongo.ui.plugin.favourite.FavouriteChooseController;
@@ -45,13 +46,12 @@ public class App extends Application {
 
         //MultiDex.install(this);
 
-        AndroidCommon.onCreate(this);
-        AndroidCommon.setImageViewType(ImageViewType.Smart);
-        AndroidCommon.configLog("## mongo-im ##", true);
-
         //初始化
         MongoIM im = MongoIM.sharedInstance();
         im.init(this);
+
+        MessageHandler mongoMessageHandler = new MongoMessageHandler("100000");
+
 
         //设置消息处理器为融云
         String token = "faO5NqYgpb9vIDoZ1zuROIq5DctN/R+V4QoOwF9US6Z6ZBIJAqt8na6N+CACEbVqpxU8QP7jU3RttHSdno8Ncw==";
