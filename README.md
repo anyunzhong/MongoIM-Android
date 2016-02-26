@@ -478,3 +478,86 @@ public class YourMessageTemplate extends BaseMessageTemplate {
 MongoIM.sharedInstance().registerMessageContent(YourMessage.class);
 MongoIM.sharedInstance().registerMessageTemplate(YourMessageTemplate.class);
 ```
+
+
+####自定义插件
+```java
+public class YourPluginProvider extends PluginProvider {
+
+
+    public YourPluginProvider() {
+        icon = R.mipmap.icon;
+        name = "你的插件名称";
+    }
+
+}
+```
+
+注册插件
+```java
+im.registerPlugin(YourPluginProvider.class, Conversation.Type.PRIVATE);
+```
+
+
+
+<br />
+融云消息扩展
+============
+
+####新增融云消息 具体可参照默认的红包 分享等消息的实现 具体细节可以参考融云官方文档
+
+```java
+请参考RcShareMessage这个类
+```
+
+
+####注册融云消息
+```java
+RongIMClient.registerMessageType(YourRongCloudMessage.class);
+```
+
+####对接融云消息
+
+将融云消息转换为MongoIM消息
+```java
+public class RongCloudToMongoYourMessageContentAdapter extends RongCloudToMongoMessageContentAdapter<YourRongCloudMessage> {
+
+    @Override
+    protected String getConversationSubTitle(YourRongCloudMessage content) {
+        //返回消息汇总列表地方的文字
+    }
+
+    @Override
+    public String getMongoMessageType() {
+        return MessageContent.Type.Your_RONG_CLOUD_TYPE;
+    }
+
+    @Override
+    public MessageContent getMongoMessageContent(YourRongCloudMessage message) {
+        //你的转换逻辑
+    }
+}
+@end
+```
+
+将MongoIM的消息转换成融云的
+```java
+public class MongoToRongYourMessageContentAdapter extends MongoToRongMessageContentAdapter<YourMessage> {
+
+    @Override
+    public MessageContent getRongCloudMessageContent(YourMessage messageContent) {
+        return //你的转化逻辑
+    }
+}
+```
+
+注册新增的类型 
+
+```java
+    RongCloudToMongoMessageContentAdapterManager rongManager = RongCloudToMongoMessageContentAdapterManager.sharedInstance();
+    rongManager.register(YourRongCloudMessage.class, RongCloudToMongoYourMessageContentAdapter.class);
+    
+    
+    MongoToRongCloudMessageContentAdapterManager mongoManager = MongoToRongCloudMessageContentAdapterManager.sharedInstance();
+    mongoManager.register(YourMessage.class, MongoToRongYourMessageContentAdapter.class);    
+```
