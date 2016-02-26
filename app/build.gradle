@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        applicationId "im.mongo.demo"
+        minSdkVersion 14
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+
+        //multiDexEnabled false
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    signingConfigs {
+        debug {
+            File strFile = new File("./mongoim.jks")
+            storeFile file(strFile)
+            storePassword "123456"
+            keyAlias "mongoim"
+            keyPassword "123456"
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+}
+
+dependencies {
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile (project(':mongo-im')){
+        exclude group: 'de.greenrobot', module: 'eventbus'
+    }
+
+
+    //融云
+    compile project(':IMKit')
+
+    //compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
+    //compile("com.android.support:multidex:1.0.0")
+
+    //视频处理
+    compile 'com.github.hiteshsondhi88.libffmpeg:FFmpegAndroid:0.2.5'
+
+}
+apply plugin: 'com.getkeepsafe.dexcount'

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">AndroidChatViewLib</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_red_bag_plugin">RedBagPlugin</string>
+    <string name="title_activity_red_bag_create_controller">RedBagCreateController</string>
+    <string name="title_activity_web_view_controller">WebViewController</string>
+    <string name="title_activity_location_controller">LocationController</string>
+    <string name="title_activity_name_card_choose_controller">NameCardChooseController</string>
+    <string name="title_activity_video_play_controller">VideoPlayController</string>
+</resources>

@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="0dp"
+    android:fitsSystemWindows="true"
+    android:background="@android:color/white">
+
+
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <fragment
+            android:id="@+id/fragment_plugin"
+            android:name="net.datafans.android.chatview.view.plugin.PluginViewFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <fragment
+            android:id="@+id/fragment_emotion"
+            android:name="net.datafans.android.chatview.view.emotion.EmotionViewFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </FrameLayout>
+
+
+    <fragment
+        android:id="@+id/fragment_input_toolbar"
+        android:name="net.datafans.android.chatview.view.inputtoolbar.InputToolbarFragment"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_above="@id/content_frame" />
+
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:minHeight="45dp"
+        android:layout_alignParentTop="true"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        >
+    </android.support.v7.widget.Toolbar>
+
+
+    <fragment
+        android:id="@+id/fragment_message_tableview"
+        android:name="net.datafans.android.chatview.view.messagetableview.MessageTableViewFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/fragment_input_toolbar"
+        android:layout_below="@+id/toolbar"/>
+
+    <View
+        android:id="@+id/mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:visibility="gone"
+        android:layout_above="@id/fragment_input_toolbar"/>
+
+
+    <fragment
+        android:id="@+id/voiceRecorderHud"
+        android:name="net.datafans.android.chatview.view.recorder.RecordHudFragment"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_centerInParent="true"
+        android:background="@android:color/black" />
+
+</RelativeLayout>

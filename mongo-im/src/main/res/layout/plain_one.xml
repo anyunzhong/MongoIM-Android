@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:background="@drawable/corner_plain"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Android照片墙完整版，完美结合LruCache和DiskLruCache"
+        android:textSize="16sp"
+        android:lineSpacingMultiplier="1.2"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8月25日"
+        android:textSize="12sp"
+        android:textColor="@android:color/darker_gray"/>
+
+    <net.datafans.android.common.widget.imageview.CommonImageView
+        android:id="@+id/cover"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </net.datafans.android.common.widget.imageview.CommonImageView>
+
+
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lineSpacingMultiplier="1.2"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"/>
+
+
+    <TextView
+        android:id="@+id/viewAll"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查看全文"
+        android:textSize="14sp"/>
+
+</LinearLayout>

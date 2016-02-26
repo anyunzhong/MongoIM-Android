@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/avatarContainer"
+        android:layout_width="75dp"
+        android:layout_height="70dp">
+        <net.datafans.android.common.widget.imageview.CommonImageView
+            android:id="@+id/avatar"
+            android:layout_alignParentLeft="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginBottom="10dp"/>
+    </FrameLayout>
+
+
+
+    <TextView
+        android:id="@+id/nick"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"/>
+
+
+    <TextView
+        android:id="@+id/subTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="13sp"
+        android:textColor="@android:color/darker_gray"/>
+
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="60dp"
+        android:layout_height="20dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:gravity="right"
+        android:textSize="12sp"
+        android:textColor="@android:color/darker_gray"/>
+
+
+</RelativeLayout>

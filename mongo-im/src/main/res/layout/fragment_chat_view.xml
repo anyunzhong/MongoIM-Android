@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <fragment
+            android:id="@+id/fragment_plugin"
+            android:name="im.mongo.ui.view.plugin.PluginViewFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <fragment
+            android:id="@+id/fragment_emotion"
+            android:name="im.mongo.ui.view.emotion.EmotionViewFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
+
+
+    <fragment
+        android:id="@+id/fragment_input_toolbar"
+        android:name="im.mongo.ui.view.input.InputToolbarFragment"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_above="@id/content_frame" />
+
+    <fragment
+        android:id="@+id/fragment_message_tableview"
+        android:name="im.mongo.ui.view.body.MessageTableViewFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/fragment_input_toolbar"
+        android:layout_below="@+id/toolbar" />
+
+    <View
+        android:id="@+id/mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/fragment_input_toolbar"
+        android:background="@android:color/transparent"
+        android:visibility="gone" />
+
+
+    <fragment
+        android:id="@+id/voiceRecorderHud"
+        android:name="im.mongo.ui.view.hud.RecordHudFragment"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_centerInParent="true"
+        android:background="@android:color/black" />
+
+</RelativeLayout>

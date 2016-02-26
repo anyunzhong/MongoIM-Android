@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="名片"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="3dp"
+        android:background="#e1e1e1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp">
+
+        <net.datafans.android.common.widget.imageview.CommonImageView
+            android:id="@+id/avatar"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/avatar"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nick"
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/num"
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:textColor="#c2c2c2"
+                android:textSize="13sp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

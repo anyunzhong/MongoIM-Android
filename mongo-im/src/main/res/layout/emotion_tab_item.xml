@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="60dp"
+    android:minWidth="60dp"
+    android:minHeight="40dp"
+    android:layout_height="match_parent"
+    android:background="@mipmap/emotion_tab_bg">
+
+
+    <net.datafans.android.common.widget.imageview.CommonImageView
+        android:id="@+id/icon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_centerInParent="true" />
+</RelativeLayout>
